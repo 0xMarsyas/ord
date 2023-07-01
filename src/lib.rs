@@ -68,6 +68,7 @@ use {
     thread,
     time::{Duration, Instant, SystemTime},
   },
+  sysinfo::{System, SystemExt},
   tempfile::TempDir,
   tokio::{runtime::Runtime, task},
 };
@@ -139,6 +140,13 @@ fn integration_test() -> bool {
 
 fn timestamp(seconds: u32) -> DateTime<Utc> {
   Utc.timestamp_opt(seconds.into(), 0).unwrap()
+}
+
+fn unbound_outpoint() -> OutPoint {
+  OutPoint {
+    txid: Hash::all_zeros(),
+    vout: 0,
+  }
 }
 
 pub fn main() {
